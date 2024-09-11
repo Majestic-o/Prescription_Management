@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: flex;
+        }
+        .left-side {
+            width: 50%;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+        .right-side {
+            width: 50%;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+        .form-control:focus {
+            border-color: #aaa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .department-select, .doctor-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+        .book-appointment-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .book-appointment-btn:hover {
+            background-color: #3e8e41;
+        }
+        .appointment-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .appointment-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .appointment-list li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h2>Book Appointment</h2>
+            <form id="appointment-form">
+                <div class="form-group">
+                    <label for="department">Department:</label>
+                    <select class="department-select" id="department">
+                        <option value="">Select Department</option>
+                        <option value="cardiologist">Cardiologist</option>
+                        <option value="neurologist">Neurologist</option>
+                        <option value="ent">ENT</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="doctor">Doctor:</label>
+                    <select class="doctor-select" id="doctor">
+                        <option value="">Select Doctor</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" class="form-control" id="age" placeholder="Enter your age">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" class="form-control" id="date">
+                </div>
+                <div class="form-group">
+                    <label for="time">Time:</label>
+                    <input type="time" class="form-control" id="time">
+                </div>
+                <button class="book-appointment-btn" id="book-appointment-btn">Book Appointment</button>
+            </form>
+        </div>
+        <div class="right-side">
+            <h2>Appointments</h2>
+            <ul class="appointment-list" id="appointment-list">
+                <!-- appointments will be listed here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const doctorOptions = {
+            cardiologist: ["Dr. Smith", "Dr. Johnson", "Dr. Lee"],
+            neurologist: ["Dr. Brown", "Dr. Garcia", "Dr. Davis"],
+            ent: ["Dr. Wilson", "Dr. Martinez", "Dr. Anderson"]
+        };
+
+        document.getElementById('department').addEventListener('change', function() {
+            const department = this.value;
+            const doctorSelect = document.getElementById('doctor');
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
+
+            if (doctorOptions[department]) {
+                doctorOptions[department].forEach(doctor => {
+                    const option = document.createElement('option');
+                    option.value = doctor;
+                    option.textContent = doctor;
+                    doctorSelect.appendChild(option);
+                });
+            }
+        });
+
+        let appointments = [];
+
+        document.getElementById('book-appointment-btn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            let department = document.getElementById('department').value;
+            let doctor = document.getElementById('doctor').value;
+            let name = document.getElementById('name').value;
+            let age = document.getElementById('age').value;
+            let email = document.getElementById('email').value;
+            let date = document.getElementById('date').value;
+            let time = document.getElementById('time').value;
+
+            if (department && doctor && name && age && email && date && time) {
+                let appointment = {
+                    department: department,
+                    doctor: doctor,
+                    name: name,
+                    age: age,
+                    email: email,
+                    date: date,
+                    time: time
+                };
+
+                appointments.push(appointment);
+                displayAppointments();
+
+                // Send appointment details to the server to trigger email
+                try {
+                    let response = await fetch('/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(appointment)
+                    });
+
+                    if (response.ok) {
+                        alert('Appointment booked and email sent successfully');
+                    } else {
+                        alert('Failed to send email');
+                    }
+                } catch (error) {
+                    alert('Error occurred while sending email');
+                }
+
+                clearForm();
+            } else {
+                alert('Please fill out all fields');
+            }
+        });
+
+        function displayAppointments() {
+            const appointmentList = document.getElementById('appointment-list');
+            appointmentList.innerHTML = '';
+
+            appointments.forEach((appointment, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${index + 1}. ${appointment.date} ${appointment.time} - ${appointment.department} with ${appointment.doctor}`;
+                appointmentList.appendChild(listItem);
+            });
+        }
+
+        function clearForm() {
+            document.getElementById('department').value = '';
+            document.getElementById('doctor').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('time').value = '';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rajdhani:wght@400;500&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: calc(100vh - 50px); /* Adjust height to accommodate navbar */
+        }
+        .left, .right {
+            flex: 1;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .left {
+            background-color: #000000;
+        }
+        .right {
+            background-color: #3a2648;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding: 20px;
+        }
+        .box {
+            background-color: #7f50deac;
+            padding: 20px;
+            border-radius: 10px;
+            border: #7f50de solid 5px;
+            margin: 10px;
+            width: 80%;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+  
+
+        .upload-form label {
+            margin-bottom: 10px;
+            color: #000000; /* Change label color to white for contrast */
+
+            background: linear-gradient(45deg, #d14023, #e7ac07);
+            text-align: center;
+            padding: 15px 40px;
+            letter-spacing: 1.5px;
+            user-select: none;
+            box-shadow: 5px 15px 25px rgba(0, 0, 0, 0.35);
+            border-radius: 3px;
+
+            font-size: 18px; /* Make font size the same as HOSPITALS text */
+            font-weight: bold; /* Make it bold */
+            font-family: sans-serif;
+        }
+
+        .upload-form label:hover{
+            background: linear-gradient(45deg, #bb3a20, #c99506);
+        }
+        .upload-form input[type="file"] {
+            margin-bottom: 20px;
+            display: none;
+        }
+        .upload-form button {
+            background: linear-gradient(45deg, #0162c8, #55e7f6);
+            color: #2a1c1c;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .upload-form button:hover {
+            background: linear-gradient(45deg, #015ab9, #48c2d0);
+        }
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .image-gallery li {
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-gallery img {
+            width: 200px;
+            height: auto;
+            border-radius: 5px;
+            cursor: pointer; /* Change cursor to pointer to indicate clickability */
+        }
+        .remove-button {
+            margin-top: 10px;
+            background-color: #ff0000;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .text-bold {
+            font-size: 18px; /* Make font size the same as the label */
+            font-weight: bold; /* Make it bold */
+            color: #fff; /* Change text color to white for contrast */
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .modal-content, #caption {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+        @keyframes zoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #9d8189;
+            padding: 15px 80px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .brand {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            position: relative;
+        }
+        .navbar .brand::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background-color: #acbd6b;
+            display: inline-block;
+            position: absolute;
+            top: 70%;
+            transform: translateY(-50%);
+            left: calc(100% + 5px);
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 45px;
+            padding-right: 50px;
+        }
+        .navbar .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 25px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand">MediVault</div>
+        <div class="nav-links">
+            <a href="patientHome.html">HOME</a>
+            <a href="upload.html">RECORD</a>
+            <a href="hospital.html">HOSPITALS</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="left">
+            <div class="box">
+                <form class="upload-form">
+                    <label for="image-upload">Choose File</label>
+                    <input class="inputI" type="file" id="image-upload" name="image-upload" accept="image/*" required>
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+        </div>
+        <div class="right">
+            <ul class="image-gallery">
+                <!-- Images will be added here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        // Handle form submission
+        const uploadForm = document.querySelector('.upload-form');
+        const imageUpload = document.querySelector('#image-upload');
+        const imageGallery = document.querySelector('.image-gallery');
+        const modal = document.getElementById('myModal');
+        const modalImg = document.getElementById('img01');
+        const span = document.getElementsByClassName('close')[0];
+
+        uploadForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            // Create a new image element
+            const image = document.createElement('img');
+            image.src = URL.createObjectURL(imageUpload.files[0]);
+
+            // Create a remove button
+            const removeButton = document.createElement('button');
+            removeButton.className = 'remove-button';
+            removeButton.textContent = 'Remove';
+
+            // Add the image and remove button to the gallery
+            const listItem = document.createElement('li');
+            listItem.appendChild(image);
+            listItem.appendChild(removeButton);
+            imageGallery.appendChild(listItem);
+
+            // Add event listener to image for modal display
+            image.addEventListener('click', () => {
+                modal.style.display = 'block';
+                modalImg.src = image.src;
+            });
+
+            // Add event listener to remove button
+            removeButton.addEventListener('click', () => {
+                listItem.remove();
+            });
+
+            // Clear the file input
+            imageUpload.value = '';
+        });
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = () => {
+            modal.style.display = 'none';
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

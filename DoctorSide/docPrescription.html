@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write Prescription</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .form-control:focus {
+            border-color: #aaa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-control-textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        .prescribe-btn {
+            display: block;
+            width: 100%;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .prescribe-btn:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Write Prescription</h2>
+        <form id="prescription-form">
+            <div class="form-group">
+                <label for="patient-name">Patient Name:</label>
+                <input type="text" id="patient-name" class="form-control" placeholder="Enter patient's name">
+            </div>
+            <div class="form-group">
+                <label for="patient-age">Patient Age:</label>
+                <input type="number" id="patient-age" class="form-control" placeholder="Enter patient's age">
+            </div>
+            <div class="form-group">
+                <label for="prescription-date">Prescription Date:</label>
+                <input type="date" id="prescription-date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="doctor-name">Doctor's Name:</label>
+                <input type="text" id="doctor-name" class="form-control" placeholder="Enter doctor's name">
+            </div>
+            <div class="form-group">
+                <label for="prescription-details">Prescription Details:</label>
+                <textarea id="prescription-details" class="form-control form-control-textarea" placeholder="Enter prescription details"></textarea>
+            </div>
+            <button type="submit" class="prescribe-btn">Prescribe</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('prescription-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let patientName = document.getElementById('patient-name').value;
+            let patientAge = document.getElementById('patient-age').value;
+            let prescriptionDate = document.getElementById('prescription-date').value;
+            let doctorName = document.getElementById('doctor-name').value;
+            let prescriptionDetails = document.getElementById('prescription-details').value;
+
+            if (patientName && patientAge && prescriptionDate && doctorName && prescriptionDetails) {
+                let prescription = {
+                    patientName: patientName,
+                    patientAge: patientAge,
+                    prescriptionDate: prescriptionDate,
+                    doctorName: doctorName,
+                    prescriptionDetails: prescriptionDetails
+                };
+
+                console.log('Prescription Details:', prescription);
+                alert('Prescription written successfully!');
+
+                // Clear the form
+                document.getElementById('prescription-form').reset();
+            } else {
+                alert('Please fill out all fields');
+            }
+        });
+    </script>
+</body>
+</html>

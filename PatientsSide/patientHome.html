@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rajdhani:wght@400;500&display=swap">
+    <style>
+        /* Add some basic styling to make the layout visible */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: calc(100vh - 50px); /* Adjust height to accommodate navbar */
+            padding: none;
+        }
+        .left, .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .left {
+            background-color: #ffd6ff;
+        }
+        .right {
+            background-color: #e7c6ff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #9d8189;
+            padding: 15px 80px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .brand {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            position: relative;
+        }
+        .navbar .brand::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background-color: #acbd6b;
+            display: inline-block;
+            position: absolute;
+            top: 70%;
+            transform: translateY(-50%);
+            left: calc(100% + 5px);
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 45px;
+            padding-right: 50px;
+        }
+        .navbar .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 25px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .left a, .right a {
+            text-decoration: none;
+            color: black;
+        }
+        .slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .slide {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease; /* Reduced transition time */
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slide .text {
+            position: absolute;
+            top: 30%;
+            right: 10%;
+            color: white;
+            font-size: 90px; /* Increased font size */
+            font-weight: bold;
+            text-align: right; /* Right align text */
+        }
+        .slide .context {
+            position: absolute;
+            top: 45%; /* Adjusted position */
+            right: 10%;
+            color: white;
+            font-size: 40px;
+            text-align: right; /* Right align text */
+            width: 40%; /* Set width to occupy half the screen */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand">MediVault</div>
+        <div class="nav-links">
+            <a href="./patientHome.html">HOME</a>
+            <a href="./upload.html">RECORD</a>
+            <a href="./hospital.html">HOSPITALS</a>
+        </div>
+    </div>
+
+    <div class="slider">
+        <div class="slide">
+            <img src="https://img.freepik.com/free-photo/anxiety-inducing-imagery-with-angst-feelings-unease_23-2150981941.jpg" alt="Slide 1">
+            <div class="text">Upload</div>
+            <div class="context">Making appointments easy: Streamline your scheduling process, eliminate waiting times, and access your appointments anytime, anywhere</div>
+        </div>
+        <div class="slide">
+            <img src="https://png.pngtree.com/thumb_back/fh260/background/20230423/pngtree-dark-hallway-inside-modern-hospital-image_2490674.jpg" alt="Slide 2">
+            <div class="text">Appointments</div>
+            <div class="context">Making appointments easy: Streamline your scheduling process, eliminate waiting times, and access your appointments anytime, anywhere</div>
+        </div>
+        <div class="slide">
+            <img src="https://t4.ftcdn.net/jpg/05/75/89/71/360_F_575897179_M1wxvTUjde2vNsZB6V4oQIj1N9NBSHls.jpg" alt="Slide 3">
+            <div class="text">Hospitals</div>
+            <div class="context">Making appointments easy: Streamline your scheduling process, eliminate waiting times, and access your appointments anytime, anywhere</div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide() {
+            slides.forEach(slide => {
+                slide.style.display = 'none';
+            });
+            slides[currentSlide].style.display = 'flex';
+            currentSlide = (currentSlide + 1) % slides.length;
+        }
+
+        showSlide();
+        setInterval(showSlide, 3000);
+    </script>
+</body>
+</html>

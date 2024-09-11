@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MediVault</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Rajdhani:wght@400;500&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #f5f5dc; /* Beige color */
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .section p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+            margin: 0 0 15px 0;
+        }
+        .section ul {
+            list-style-type: disc;
+            margin: 0 0 15px 20px;
+            padding: 0;
+        }
+        .section ul li {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+        .team-member {
+            flex: 1 1 30%;
+            max-width: 30%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .team-member h3 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .team-member p {
+            font-size: 1em;
+            color: #666;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #9d8189;
+            padding: 15px 80px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .brand {
+            font-family: 'Pacifico', cursive;
+            font-size: 24px;
+            position: relative;
+        }
+        .navbar .brand::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background-color: #acbd6b;
+            display: inline-block;
+            position: absolute;
+            top: 70%;
+            transform: translateY(-50%);
+            left: calc(100% + 5px);
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 45px;
+            padding-right: 50px;
+        }
+        .navbar .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand">MediVault</div>
+        <div class="nav-links">
+            <a href="./main.html">HOME</a>
+            <a href="patientReg.html">PATIENT</a>
+            <a href="doctorReg.html">DOCTOR</a>
+            <a href="#">ABOUT</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1>About MediVault</h1>
+            <p>Your Trusted Partner in Prescription Management</p>
+        </div>
+
+        <div class="section">
+            <h2>Our Mission</h2>
+            <p>At MediVault, our mission is to revolutionize healthcare by providing a seamless and secure platform for managing prescriptions. We aim to bridge the gap between doctors and patients through innovative technology, ensuring timely and accurate medication management.</p>
+        </div>
+
+        <div class="section">
+            <h2>Our Vision</h2>
+            <p>We envision a world where healthcare is accessible, efficient, and patient-centered. By leveraging cutting-edge technology, we strive to enhance the quality of care, improve patient outcomes, and streamline the prescription process for healthcare providers and patients alike.</p>
+        </div>
+
+        <div class="section">
+            <h2>Our Services</h2>
+            <p>MediVault offers a comprehensive suite of services designed to meet the needs of both patients and healthcare providers:</p>
+            <ul>
+                <li><strong>Patient Dashboard:</strong> View upcoming and past appointments, access medical history, and receive medication reminders.</li>
+                <li><strong>Prescription Refill Requests:</strong> Request refills directly through the platform for convenience.</li>
+                <li><strong>Telemedicine Integration:</strong> Conduct virtual consultations with healthcare providers.</li>
+                <li><strong>Secure Messaging:</strong> Communicate with doctors for quick questions and follow-ups.</li>
+                <li><strong>Appointment Scheduling:</strong> Book and manage appointments online with ease.</li>
+                <li><strong>Health Tracking:</strong> Monitor vital signs and medication adherence through integrated health apps.</li>
+                <li><strong>Electronic Health Records (EHR):</strong> Access and update patient medical histories securely.</li>
+                <li><strong>Prescription Templates:</strong> Save and reuse common prescriptions for efficiency.</li>
+                <li><strong>Automated Drug Interaction Alerts:</strong> Receive alerts for potential drug interactions.</li>
+                <li><strong>Analytics and Reporting:</strong> Gain insights into patient demographics and treatment outcomes.</li>
+                <li><strong>Integration with Pharmacies:</strong> Send prescriptions directly to partnered pharmacies.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Our Team</h2>
+            <div class="team">
+                <div class="team-member">
+                    <img src="https://st2.depositphotos.com/1036149/10178/i/950/depositphotos_101783214-stock-photo-funny-cartoon-dodo-bird.jpg" alt="John Doe">
+                    <h3>Anni</h3>
+                    <p>Member</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://st2.depositphotos.com/1036149/10178/i/950/depositphotos_101783214-stock-photo-funny-cartoon-dodo-bird.jpg" alt="Jane Smith">
+                    <h3>Anni</h3>
+                    <p>Member</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://st2.depositphotos.com/1036149/10178/i/950/depositphotos_101783214-stock-photo-funny-cartoon-dodo-bird.jpg" alt="Mike Johnson">
+                    <h3>Anni</h3>
+                    <p>Member</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, please feel free to reach out to us:</p>
+            <p><strong>Email:</strong> dodo@medivault.com</p>
+            <p><strong>Phone:</strong> 1234567891</p>
+        </div>
+    </div>
+</body>
+</html>
